@@ -11,6 +11,14 @@ services:
     environment:
       TELEGRAM_PROXY_KEY: ${TELEGRAM_PROXY_KEY:?Set a random key of at least 32 characters}
     expose: ["3000"]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: dokploy-network
+      traefik.http.routers.telegram-port.rule: Host(`tg-port.jollune.ir`)
+      traefik.http.routers.telegram-port.entrypoints: websecure
+      traefik.http.routers.telegram-port.tls.certresolver: letsencrypt
+      traefik.http.routers.telegram-port.service: telegram-port
+      traefik.http.services.telegram-port.loadbalancer.server.port: "3000"
     networks: [dokploy-network]
     mem_limit: 256m
     cpus: 0.5
