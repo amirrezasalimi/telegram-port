@@ -16,6 +16,7 @@ services:
       traefik.docker.network: dokploy-network
       traefik.http.routers.telegram-port.rule: Host(`tg-port.jollune.ir`)
       traefik.http.routers.telegram-port.entrypoints: websecure
+      traefik.http.routers.telegram-port.tls: "true"
       traefik.http.routers.telegram-port.tls.certresolver: letsencrypt
       traefik.http.routers.telegram-port.service: telegram-port
       traefik.http.services.telegram-port.loadbalancer.server.port: "3000"
